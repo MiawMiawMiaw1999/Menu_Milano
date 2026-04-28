@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Maison — Menu</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0A0A0A;
+    --black-soft: #111111;
+    --black-card: #161616;
+    --gold: #C9A96E;
+    --gold-bright: #E2C48A;
+    --gold-dim: #8A6E42;
+    --white-desc: #F0EDE8;
+    --border: rgba(201, 169, 110, 0.15);
+    --border-strong: rgba(201, 169, 110, 0.35);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--black);
+    color: var(--gold);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    background-color: var(--black);
+    padding: 80px 24px 60px;
+    text-align: center;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border-strong);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 0%, rgba(201,169,110,0.07) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 80% 100%, rgba(201,169,110,0.04) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero-ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+
+  .hero-ornament-line {
+    height: 1px;
+    width: 48px;
+    background: linear-gradient(90deg, transparent, var(--gold));
+  }
+
+  .hero-ornament-line.right {
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+
+  .hero-ornament svg {
+    width: 22px;
+    height: 22px;
+    fill: var(--gold);
+    opacity: 0.85;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 12vw, 84px);
+    font-weight: 300;
+    color: var(--gold-bright);
+    letter-spacing: 0.08em;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .hero-sub {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 28px;
+  }
+
+  .hero-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--white-desc);
+    max-width: 380px;
+    margin: 0 auto;
+    line-height: 1.6;
+    opacity: 0.55;
+  }
+
+  .table-badge {
+    display: inline-block;
+    margin-top: 32px;
+    padding: 8px 22px;
+    border: 1px solid var(--border-strong);
+    color: var(--gold);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    font-weight: 400;
+  }
+
+  /* ── NAV ── */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: var(--black-soft);
+    border-bottom: 1px solid var(--border-strong);
+    padding: 0 16px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .nav::-webkit-scrollbar { display: none; }
+
+  .nav-inner {
+    display: flex;
+    gap: 0;
+    white-space: nowrap;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .nav a {
+    display: inline-block;
+    padding: 16px 18px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .nav a:hover, .nav a.active {
+    color: var(--gold-bright);
+    border-bottom-color: var(--gold);
+  }
+
+  /* ── CONTENT ── */
+  .content {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+  }
+
+  /* ── SECTION ── */
+  .section {
+    padding-top: 64px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 36px;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 400;
+    color: var(--gold-bright);
+    letter-spacing: 0.02em;
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border-strong), transparent);
+  }
+
+  /* ── ITEMS ── */
+  .item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px 20px;
+    align-items: baseline;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+    animation: fadeUp 0.5s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .item:last-child { border-bottom: none; }
+
+  .item-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--gold-bright);
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .item-price {
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    grid-column: 2;
+    grid-row: 1;
+    white-space: nowrap;
+  }
+
+  .item-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--white-desc);
+    line-height: 1.5;
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .item-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    grid-column: 1 / -1;
+    grid-row: 3;
+    margin-top: 4px;
+  }
+
+  .tag {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 2px;
+  }
+
+  .tag-veg  { background: rgba(201,169,110,0.08); color: var(--gold); border: 1px solid rgba(201,169,110,0.25); }
+  .tag-new  { background: rgba(201,169,110,0.12); color: var(--gold-bright); border: 1px solid rgba(201,169,110,0.3); }
+  .tag-chef { background: rgba(201,169,110,0.06); color: var(--gold-dim); border: 1px solid rgba(201,169,110,0.2); }
+  .tag-spicy{ background: rgba(180,60,40,0.15);  color: #D4836A; border: 1px solid rgba(180,60,40,0.3); }
+  .tag-gluten{background: rgba(201,169,110,0.06); color: var(--gold-dim); border: 1px solid rgba(201,169,110,0.18); }
+
+  /* ── SUBSECTION ── */
+  .subsection-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin: 40px 0 8px;
+  }
+
+  /* ── BOISSONS GRID ── */
+  .drinks-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 40px;
+  }
+
+  @media (max-width: 480px) {
+    .drinks-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── ALLERGENS ── */
+  .allergens {
+    margin-top: 60px;
+    padding: 24px;
+    border: 1px solid var(--border-strong);
+    border-radius: 2px;
+    background: var(--black-card);
+  }
+
+  .allergens h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 10px;
+    color: var(--gold);
+  }
+
+  .allergens p {
+    font-size: 13px;
+    color: var(--white-desc);
+    line-height: 1.7;
+    opacity: 0.65;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--black-soft);
+    border-top: 1px solid var(--border-strong);
+    text-align: center;
+    padding: 40px 24px;
+  }
+
+  .footer-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--gold-bright);
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+
+  footer p {
+    font-size: 12px;
+    color: var(--gold-dim);
+    letter-spacing: 0.1em;
+  }
+
+  footer a {
+    color: var(--gold);
+    text-decoration: none;
+  }
+
+  .divider-ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 12px 0 16px;
+  }
+
+  .divider-ornament span {
+    height: 1px;
+    width: 40px;
+    background: var(--border-strong);
+    display: block;
+  }
+
+  .divider-ornament svg {
+    width: 14px;
+    height: 14px;
+    fill: var(--gold);
+    opacity: 0.6;
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-ornament">
+    <div class="hero-ornament-line"></div>
+    <svg viewBox="0 0 24 24"><path d="M12 2C6 8 2 10 2 14a10 10 0 0020 0c0-4-4-6-10-12zm0 18a8 8 0 01-8-8c0-2.8 2.8-5.2 8-10 5.2 4.8 8 7.2 8 10a8 8 0 01-8 8z"/></svg>
+    <div class="hero-ornament-line right"></div>
+  </div>
+  <p class="hero-sub">Restaurant · Paris</p>
+  <h1>La Maison</h1>
+  <p class="hero-desc">Cuisine française contemporaine, produits de saison, terroir d'exception.</p>
+  <div class="table-badge">Table n° 7</div>
+</header>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#entrees" class="active">Entrées</a>
+    <a href="#plats">Plats</a>
+    <a href="#desserts">Desserts</a>
+    <a href="#fromages">Fromages</a>
+    <a href="#boissons">Boissons</a>
+  </div>
+</nav>
+
+<!-- CONTENT -->
+<main class="content">
+
+  <!-- ENTRÉES -->
+  <section class="section" id="entrees">
+    <div class="section-header">
+      <h2 class="section-title">Entrées</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="item">
+      <span class="item-name">Velouté de châtaignes</span>
+      <span class="item-price">14 €</span>
+      <span class="item-desc">Crème légère au laurier, huile de truffe noire, tuile de parmesan</span>
+      <div class="item-tags"><span class="tag tag-veg">Végétarien</span></div>
+    </div>
+
+    <div class="item">
+      <span class="item-name">Tartare de bœuf façon maison</span>
+      <span class="item-price">18 €</span>
+      <span class="item-desc">Bœuf Simmental haché au couteau, câpres, cornichons, jaune d'œuf confit, frites fines</span>
+      <div class="item-tags"><span class="tag tag-chef">Signature</span></div>
+    </div>
+
+    <div class="item">
+      <span class="item-name">Foie gras mi-cuit</span>
+      <span class="item-price">22 €</span>
+      <span class="item-desc">Foie gras de canard des Landes, chutney de figues, brioche toastée, fleur de sel</span>
+      <div class="item-tags"><span class="tag tag-new">Nouveau</span></div>
+    </div>
+
+    <div class="item">
+      <span class="item-name">Burrata & tomates rôties</span>
+      <span class="item-price">16 €</span>
+      <span class="item-desc">Burrata crémeuse, tomates confites, basilic frais, huile d'olive extra-vierge, pignons torréfiés</span>
+      <div class="item-tags"><span class="tag tag-veg">Végétarien</span><span class="tag tag-gluten">Sans gluten</span></div>
+    </div>
+
+    <div class="item">
+      <span class="item-name">Noix de Saint-Jacques</span>
+      <span class="item-price">26 €</span>
+      <span class="item-desc">Trois noix snackées, purée de panais vanillée, émulsion au citron vert, caviar d'Aquitaine</span>
+      <div class="item-tags"><span class="tag tag-chef">Signature</span></div>
+    </div>
+  </section>
+
+  <!-- PLATS -->
+  <section class="section" id="plats">
+    <div class="section-header">
+      <h2 class="section-title">Plats</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <p class="subsection-label">Terre</p>
+
+    <div class="item">
+      <span class="item-name">Filet de bœuf Rossini</span>
+      <span class="item-price">42 €</span>
+      <span class="item-desc">180g de filet maturé 45 jours, escalope de foie gras poêlée, sauce périgourdine à la truffe noire, gratin dauphinois</span>
+      <div class="item-tags"><span class="tag tag-chef">Signature</span></div>
+    </div>
+
+    <div class="item">
+      <span class="item-name">Confit de canard</span>
+      <span class="item-price">28 €</span>
+      <span class="item-desc">Cuisse confite 24h, sarladaises fondantes, salade de frisée aux lardons, vinaigrette moutarde ancienne</span>
+    </div>
+
+    <div class="item">
+      <span class="item-name">Côte de veau à la crème</span>
+      <span class="item-price">34 €</span>
+      <span class="item-desc">Veau de lait du Limousin, morilles fraîches, sauce à la crème et vin jaune, légumes printaniers</span>
+      <div class="item-tags"><span class="tag tag-new">Nouveau</span></div>
+    </div>
+
+    <p class="subsection-label">Mer</p>
+
+    <div class="item">
+      <span class="item-name">Bar en croûte de sel</span>
+      <span class="item-price">36 €</span>
+      <span class="item-desc">Bar de ligne cuit entier, beurre blanc au cerfeuil, fenouil braisé, pommes de terre grenailles</span>
+      <div class="item-tags"><span class="tag tag-gluten">Sans gluten</span></div>
+    </div>
+
+    <div class="item">
+      <span class="item-name">Homard breton bleu</span>
+      <span class="item-price">58 €</span>
+      <span class="item-desc">Demi-homard grillé, beurre à l'estragon, risotto crémeux à l'encre de seiche, tuile au parmesan</span>
+      <div class="item-tags"><span class="tag tag-chef">Signature</span></div>
+    </div>
+
+    <p class="subsection-label">Végétal</p>
+
+    <div class="item">
+      <span class="item-name">Risotto de truffe noire</span>
+      <span class="item-price">32 €</span>
+      <span class="item-desc">Riz Carnaroli, Pécorino affiné, truffe noire du Périgord, beurre de qualité supérieure, copeaux généreux</span>
+      <div class="item-tags"><span class="tag tag-veg">Végétarien</span><span class="tag tag-chef">Signature</span></div>
+    </div>
+
+    <div class="item">
+      <span class="item-name">Gnocchis à la parisienne</span>
+      <span class="item-price">22 €</span>
+      <span class="item-desc">Gnocchis dorés au beurre noisette, sauce gorgonzola, noix caramélisées, roquette sauvage</span>
+      <div class="item-tags"><span class="tag tag-veg">Végétarien</span></div>
+    </div>
+  </section>
+
+  <!-- DESSERTS -->
+  <section class="section" id="desserts">
+    <div class="section-header">
+      <h2 class="section-title">Desserts</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="item">
+      <span class="item-name">Soufflé au Grand Marnier</span>
+      <span class="item-price">16 €</span>
+      <span class="item-desc">Soufflé chaud commandé en début de repas, crème anglaise à la vanille Bourbon</span>
+      <div class="item-tags"><span class="tag tag-chef">Signature</span></div>
+    </div>
+
+    <div class="item">
+      <span class="item-name">Tarte Tatin revisitée</span>
+      <span class="item-price">13 €</span>
+      <span class="item-desc">Pommes Reine des Reinettes caramélisées, pâte feuilletée pur beurre, glace vanille maison</span>
+    </div>
+
+    <div class="item">
+      <span class="item-name">Fondant au chocolat Valrhona</span>
+      <span class="item-price">14 €</span>
+      <span class="item-desc">Cœur coulant 70% cacao, glace caramel beurre salé, tuile dentelle</span>
+      <div class="item-tags"><span class="tag tag-new">Nouveau</span></div>
+    </div>
+
+    <div class="item">
+      <span class="item-name">Paris-Brest revisité</span>
+      <span class="item-price">14 €</span>
+      <span class="item-desc">Choux croustillant, crème pralinée allégée, éclats de noisettes du Piémont</span>
+      <div class="item-tags"><span class="tag tag-chef">Signature</span></div>
+    </div>
+
+    <div class="item">
+      <span class="item-name">Assiette de mignardises</span>
+      <span class="item-price">9 €</span>
+      <span class="item-desc">Sélection du chef : macarons, truffes au chocolat, pâtes de fruits, guimauves</span>
+      <div class="item-tags"><span class="tag tag-veg">Végétarien</span></div>
+    </div>
+  </section>
+
+  <!-- FROMAGES -->
+  <section class="section" id="fromages">
+    <div class="section-header">
+      <h2 class="section-title">Fromages</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="item">
+      <span class="item-name">Plateau de fromages affinés</span>
+      <span class="item-price">18 €</span>
+      <span class="item-desc">Sélection de 5 fromages affinés par notre crémier, chutney maison, pain aux noix, miel de lavande</span>
+      <div class="item-tags"><span class="tag tag-veg">Végétarien</span></div>
+    </div>
+
+    <div class="item">
+      <span class="item-name">Comté 24 mois & noix</span>
+      <span class="item-price">12 €</span>
+      <span class="item-desc">Comté affiné de la Franche-Comté, noix fraîches, pain de campagne grillé</span>
+      <div class="item-tags"><span class="tag tag-gluten">Option sans gluten</span></div>
+    </div>
+  </section>
+
+  <!-- BOISSONS -->
+  <section class="section" id="boissons">
+    <div class="section-header">
+      <h2 class="section-title">Boissons</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <p class="subsection-label">Vins au verre</p>
+    <div class="drinks-grid">
+      <div class="item">
+        <span class="item-name">Sancerre blanc</span>
+        <span class="item-price">11 €</span>
+        <span class="item-desc">Henri Bourgeois — Loire</span>
+      </div>
+      <div class="item">
+        <span class="item-name">Bourgogne rouge</span>
+        <span class="item-price">12 €</span>
+        <span class="item-desc">Maison Champy — Côte de Beaune</span>
+      </div>
+      <div class="item">
+        <span class="item-name">Champagne Brut</span>
+        <span class="item-price">16 €</span>
+        <span class="item-desc">Billecart-Salmon — Mareuil</span>
+      </div>
+      <div class="item">
+        <span class="item-name">Côtes du Rhône</span>
+        <span class="item-price">9 €</span>
+        <span class="item-desc">Château Rayas — Grenache</span>
+      </div>
+    </div>
+
+    <p class="subsection-label">Boissons sans alcool</p>
+    <div class="drinks-grid">
+      <div class="item">
+        <span class="item-name">Eau minérale</span>
+        <span class="item-price">5 €</span>
+        <span class="item-desc">Évian, Perrier — 75cl</span>
+      </div>
+      <div class="item">
+        <span class="item-name">Limonade artisanale</span>
+        <span class="item-price">6 €</span>
+        <span class="item-desc">Citron frais, gingembre, menthe</span>
+      </div>
+      <div class="item">
+        <span class="item-name">Jus de fruits frais</span>
+        <span class="item-price">7 €</span>
+        <span class="item-desc">Orange, pomme verte, carotte-gingembre</span>
+      </div>
+      <div class="item">
+        <span class="item-name">Café gourmand</span>
+        <span class="item-price">6 €</span>
+        <span class="item-desc">Expresso + 3 mignardises maison</span>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ALLERGENS -->
+  <div class="allergens">
+    <h3>Allergènes & Régimes</h3>
+    <p>
+      Nos plats peuvent contenir des traces de gluten, fruits à coque, lait, œufs, poisson, crustacés, soja et céleri.
+      Informez notre équipe de vos allergies ou intolérances — nous ferons tout notre possible pour vous accueillir sereinement.
+      <br><br>
+      <strong style="font-weight:500;">🌿 Végétarien &nbsp;&nbsp; 🚫G Sans gluten &nbsp;&nbsp; ⭐ Signature du chef &nbsp;&nbsp; ✨ Nouveau</strong>
+    </p>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-name">La Maison</p>
+  <div class="divider-ornament">
+    <span></span>
+    <svg viewBox="0 0 24 24"><path d="M12 2C6 8 2 10 2 14a10 10 0 0020 0c0-4-4-6-10-12z"/></svg>
+    <span></span>
+  </div>
+  <p>12 rue du Faubourg Saint-Honoré, 75008 Paris</p>
+  <p style="margin-top:6px;"><a href="tel:+33142001234">+33 1 42 00 12 34</a></p>
+  <p style="margin-top:16px; font-size:11px; opacity:0.3;">Tous nos prix sont TTC — Service 12% inclus</p>
+</footer>
+
+<script>
+  const navLinks = document.querySelectorAll('.nav a');
+  const sections = document.querySelectorAll('.section');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navLinks.forEach(a => {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+</body>
+</html>
